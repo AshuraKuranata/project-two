@@ -1,7 +1,4 @@
-# project-two
-Project 2 - CRUD Application with additional functionality
-
----
+# Project 2 - CRUD Application with additional functionality
 
 # Day 1:
 

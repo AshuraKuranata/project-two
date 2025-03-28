@@ -7,8 +7,8 @@
 </head>
 <body>
     <% if (user) {%>
-        <h1>Welcome to the Bird Watching App, <%= user.username %>!</h1>
         <%- include('./partials/userview.ejs') %>
+        <h1>Welcome to the Bird Watching App, <%= user.username %>!</h1>
     <% } else { %>
         <h1>Welcome to the Bird Watching App!</h1>
         <a href="/auth/sign-up">Sign up to the Bird Watching app</a>

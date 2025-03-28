@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Bird to Model</title>
+    <title>Edit <%= bird.name%></title>
 </head>
 <body>
     <%- include('../partials/userview.ejs') %>
-    <h1>Form to add bird to model</h1>
+    <h1>Update <%= bird.name%></h1>
     <p>Hold 'control' or 'shift' on keyboard to select multiple options for dropdown.</p>
-    <form action="/birdapp/birds" method="POST">
-        <label for="name">Bird Name:</label>
-        <input autocomplete="off" type="text" name="name" id="name" required pattern="[A-Z][a-z]{1,}\D{0,}" />
+    <form action="/birdapp/birds/<%=bird._id%>?_method=PUT" method="POST">
         
         <label for="continent">Continent:</label>
         <select name="continent" id="continent" size="7" required multiple>
@@ -48,16 +46,15 @@
         </select>
 
         <label for="color">Color:</label>
-        <input type="color" name="color" id="color" required>
+        <input type="color" name="color" value="<%= bird.color%>" id="color" required>
 
         <label for="wingspan">Wingspan:</label>
-        <input type="number" name="wingspan" id="wingspan" required pattern="[1-9][0-9]{0,2}"/>
+        <input type="number" name="wingspan" id="wingspan" value="<%= bird.wingspan%>" required pattern="[1-9][0-9]{0,2}"/>
 
         <label for="isNocturnal">Nocturnal?</label>
-        <input type="checkbox" name="isNocturnal" id="isNocturnal" />
+        <input type="checkbox" name="isNocturnal" <% if (bird.isNocturnal) { %>checked<% } %> id="isNocturnal" />
 
-        <button type="submit">Add Bird to Index</button>
-
+        <button type="submit">Update <%= bird.name%></button>
     </form>
 </body>
 </html>

@@ -45,8 +45,14 @@ app.use(express.static(path.join(__dirname, 'public'))); // Call for static file
 
 // Application programs
 app.get('/', birdCtrl.home); // Navigation to home page
-app.get('/birdapp/birds', birdCtrl.birdIndex) // Navigation to the Bird Index
-app.get('/birdapp/collection', birdCtrl.userCollection) // Navigation to user's collection 
+app.get('/birdapp/birds', isSignedIn, birdCtrl.birdIndex) // Navigation to the Bird Index
+app.get('/birdapp/collection', isSignedIn, birdCtrl.userCollection) // Navigation to user's collection 
+app.get('/birdapp/newbird', isSignedIn, birdCtrl.addBirdForm)
+app.post('/birdapp/birds', isSignedIn, birdCtrl.createBird)
+app.get('/birdapp/birds/:birdId/edit', isSignedIn, birdCtrl.editBird)
+app.put('/birdapp/birds/:birdId', isSignedIn, birdCtrl.updateBird)
+app.delete('/birdapp/birds/:birdId', isSignedIn, birdCtrl.deleteBird)
+
 
 app.use('/auth', userCtrl) // Calls authentication routes built in controllers/auth.js  
 

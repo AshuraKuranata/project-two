@@ -9,8 +9,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    birdCollection: [],
-    // isAdmin: Boolean,
+    birdCollection: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Bird',
+            required: true,
+        }
+    ],
 })
 
 const User = mongoose.model('User', userSchema);
