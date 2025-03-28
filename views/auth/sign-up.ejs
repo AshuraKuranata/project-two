@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign up for a free bird-watching profile!</h1>
+    <form action="/auth/sign-up" method="POST">
+        <div class="authBox">
+            <div class="userCred">
+                <label for="username">Username:</label>
+                <p>Must be at least 3 alphanumeric characters</p>
+                <input autocomplete="off" type="text" name="username" maxlength="25" id="username" required pattern="\w{3,}" />
+            </div>
+            <div class="userCred">
+                <label for="password">Password:</label>
+                <p>Must be at least 4 characters except space, tab, newline, or returns.</p>
+                <input autocomplete="off" type="password" name="password" id="password" required pattern="\S{4,}" />
+                <label for="confirmPassword">Confirm Passworkd:</label>
+                <input autocomplete="off" type="password" name="confirmPassword" id="confirmPassword" required pattern="\S{4,}" />
+            </div>
+            <div class="userCred">
+                <button type="submit">Create Profile</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

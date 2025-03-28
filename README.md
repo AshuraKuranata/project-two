@@ -1,6 +1,10 @@
 # project-two
 Project 2 - CRUD Application with additional functionality
 
+---
+
+# Day 1:
+
 ## Introduction
 
 The expectations for this project is to implement a new CRUD application, but include additional functionality into it that was not covered in the standard lessons.
@@ -47,3 +51,11 @@ Here is my anticipated work breakdown:
 ## Initial Progress
 
 I began with the completion of the content on Authentication and Mongoose embedding and referencing objective.  I then began with the initial file structure and build of the application, creating the basic file structure and the models to utilize in this application.  This will be the first push in GitHub to start the project off.
+
+# Day 2:
+
+## User Authentication
+
+This process took some time to implement.  It was a headscratcher in trying to understand new modules to upload and add into the main code server.  My main take-aways in understanding the process:
+
+* 

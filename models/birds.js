@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const birdSchema = new mongoose.Schema({
     name: String,
+    continent: String,
     habitat: String,
     diet: String,
     color: String,
