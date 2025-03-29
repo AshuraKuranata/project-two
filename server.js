@@ -43,18 +43,25 @@ app.use(passUserToView)
 app.use(express.static(path.join(__dirname, 'public'))); // Call for static files like JS, CSS, and others to run after EJS files render
 
 
-// Application programs
-app.get('/', birdCtrl.home); // Navigation to home page
-app.get('/birdapp/birds', isSignedIn, birdCtrl.birdIndex) // Navigation to the Bird Index
-app.get('/birdapp/collection', isSignedIn, birdCtrl.userCollection) // Navigation to user's collection 
-app.get('/birdapp/newbird', isSignedIn, birdCtrl.addBirdForm)
-app.post('/birdapp/birds', isSignedIn, birdCtrl.createBird)
-app.get('/birdapp/birds/:birdId/edit', isSignedIn, birdCtrl.editBird)
-app.put('/birdapp/birds/:birdId', isSignedIn, birdCtrl.updateBird)
-app.delete('/birdapp/birds/:birdId', isSignedIn, birdCtrl.deleteBird)
+// Bird App Program:
 
+// Standard Operation for Bird Index
+app.get('/', birdCtrl.home); // View of Bird App home page 
+app.get('/birdapp/birds', isSignedIn, birdCtrl.birdIndex) // View full index of birds in model
+app.get('/birdapp/newbird', isSignedIn, birdCtrl.addBirdForm) // Form to create new bird for model
+app.post('/birdapp/birds', isSignedIn, birdCtrl.createBird) // Creates bird in model
+app.get('/birdapp/birds/:birdId/edit', isSignedIn, birdCtrl.editBird) // Form to update bird in model
+app.put('/birdapp/birds/:birdId', isSignedIn, birdCtrl.updateBird) // Update to specific bird
+app.delete('/birdapp/birds/:birdId', isSignedIn, birdCtrl.deleteBird) // Deletes bird from model
 
-app.use('/auth', userCtrl) // Calls authentication routes built in controllers/auth.js  
+// User Collection operations
+app.get('/birdapp/collection', isSignedIn, birdCtrl.userCollection) // Views user's collection
+app.get('/birdapp/collection/editcollection', isSignedIn, birdCtrl.selectBirdCollection) // Form to select bird to add to collection
+app.post('/birdapp/collection/addbird', isSignedIn, birdCtrl.addCollection) // Add Bird to User's collection
+app.post('/birdapp/collection/removebird', isSignedIn, birdCtrl.deleteCollectionBird) // Remove Bird from User's Collection
+
+// Operation for all authentication programming stored in /controllers/auth.js
+app.use('/auth', userCtrl)   
 
 app.listen(port, () => {
     console.log(`The app is ready on port ${port}`)

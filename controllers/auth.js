@@ -20,6 +20,7 @@ router.post('/sign-up', async (req, res) => {
     const user = await User.create(req.body);
     req.session.user = {
         username: user.username,
+        birdCollection: user.birdCollection,
     };
     req.session.save(() => {
         res.redirect('/');

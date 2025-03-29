@@ -7,6 +7,14 @@
 </head>
 <body>
     <%- include('../partials/userview.ejs') %>
-    <h1><%= user.username%>'s Collection of bird sightings</h1>
+    <h1><%= user.username%>'s Bird Viewing Collection</h1>
+    <% if (birds.length > 0) { %>
+        <a href="/birdapp/collection/editcollection">Click here to add or delete birds from your collection.</a>
+        <% birds.forEach((bird) => { %>
+            <h2><%= bird.name %></h2>
+    <% }) } else { %>
+        <h2>No birds in collection</h2>
+        <a href="/birdapp/collection/editcollection">Click here to add birds from your collection.</a>
+    <% } %>
 </body>
 </html>

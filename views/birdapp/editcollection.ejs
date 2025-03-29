@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Birds</title>
+</head>
+<body>
+    <%- include('../partials/userview.ejs') %>
+    <h1>Select a bird to add to collection</h1>
+    <div class="birdsBox">
+        <form action="/birdapp/collection/addbird" method="POST">
+            <div class="birdCard">
+                <select name="birdCollection" id="birdSelect">
+                    <% for (let bird of birds) { %>
+                        <option value="<%=bird._id%>"><%=bird.name%></option>
+                        <% } %>
+                </select>
+            </div>
+            <button type="submit">Add Birds to Collection</button>
+        </form>
+    </div>
+    <% if (collection.length > 0) { %>
+    <h1>Select a bird to remove from your collection</h1>
+    <div class="birdsBox">
+        <form action="/birdapp/collection/removebird" method="POST">
+            <div class="birdCard">
+                <select name="birdCollectionRemove" id="birdRemove">
+                    <% for (let bird of collection) { %>
+                        <option value="<%=bird._id%>"><%=bird.name%></option>
+                        <% } %>
+                </select>
+            </div>
+            <button type="submit">Remove Birds from Collection</button>
+        </form>
+    </div>
+    <% } %>
+</body>
+</html>
