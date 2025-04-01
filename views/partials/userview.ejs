@@ -1,8 +1,13 @@
-<a href="/">Home</a>
-<a href="/birdapp/birds">All Birds</a>
-<a href="/birdapp/collection"><%= user.username%>'s Collection</a>
-<% if (user.isAdmin === true) {%>
-    <a href="/admin">Administrator Page</a>
-<% } %>
-
-<a href="/auth/sign-out">Sign Out</a>
+<div class="container">
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="/birdapp/birds" class="nav-link">All Birds</a></li>
+        <li class="nav-item"><a href="/birdapp/collection" class="nav-link"><%= user.username%>'s Collection</a></li>
+        <% if (user.isAdmin === true) {%>
+            <li class="nav-item"><a href="/admin" class="nav-link">Administrator Page</a>
+        <% } %>
+        <li class="nav-item"><a href="/auth/sign-out" class="nav-link">Sign Out</a></li>
+      </ul>
+    </header>
+  </div>

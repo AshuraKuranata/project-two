@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>Sign up for a free bird-watching profile!</h1>
     <form action="/auth/sign-up" method="POST">
         <div class="authBox">
             <div class="userCred">
-                <label for="username">Username:</label>
-                <p>Must be at least 3 alphanumeric characters</p>
+                <label for="username" class="text">Username:</label>
+                <p class="text">Must be at least 3 alphanumeric characters</p>
                 <input autocomplete="off" type="text" name="username" maxlength="25" id="username" required pattern="\w{3,}" />
             </div>
             <div class="userCred">
-                <label for="password">Password:</label>
-                <p>Must be at least 4 characters except space, tab, newline, or returns.</p>
+                <label for="password" class="text">Password:</label>
+                <p class="text">Must be at least 4 characters except space, tab, newline, or returns.</p>
                 <input autocomplete="off" type="password" name="password" id="password" required pattern="\S{4,}" />
-                <label for="confirmPassword">Confirm Password:</label>
+                <label for="confirmPassword" class="text">Confirm Password:</label>
                 <input autocomplete="off" type="password" name="confirmPassword" id="confirmPassword" required pattern="\S{4,}" />
             </div>
             <div class="userCred">
-                <label for="admin">Administrator Credentials:</label>
+                <label for="admin" class="text">Administrator Credentials:</label>
                 <input autocomplete="off" type="password" name="admin" id="admin"/>
             </div>
-            <div class="userCred">
-                <button type="submit">Create Profile</button>
-            </div>
         </div>
+        <button id="create-btn" type="submit">Create Profile</button>
     </form>
 </body>
 </html>

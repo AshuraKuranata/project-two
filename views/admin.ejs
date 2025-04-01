@@ -4,46 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="main">
     <%- include('./partials/userview.ejs') %>
     <h1>Administrator page</h1>
-    <h2>Users</h2>
-    <div class="adminBox">
-        <% for (let user of users) { %>
-            <h3><%=user.username%></h3>
-            <p>Current Bird Collection: <%=user.birdCollection.length%></p>
-            <p>Admin? <%=user.isAdmin%></p>
-            <form action="/admin/<%=user.id%>?_method=DELETE" method="POST">
-                <button type="submit">Delete <%=user.username%> from index</button>
-            </form>
-        <% } %>
-    </div>
-    <h2>Bird Requests</h2>
-    <div class="birdsBox">
-        <% birdReq.forEach((bird) => { %>
-            <% if (bird.isApproved === false) { %>
-                <div class="birdCard">
-                    <h2><%= bird.name %></h2>
-                    <p>Requester: <%= bird.requester.username %></p>
-                    <p>Continent(s): <%= bird.continent.join(", ") %></p>
-                    <p>Habitat(s): <%= bird.habitat.join(", ") %></p>
-                    <p>Diet: <%= bird.diet.join(", ") %></p>
-                    <p>Color: <%= bird.color%></p> <!--FUNCTION MAKE A BOX THAT DISPLAYS THE HEXADECIMAL COLOR, NOT THE STRING-->
-                    <p>Wingspan: <%= bird.wingspan %>cm</p>
-                    <% if (bird.isNocturnal === true) { %>
-                        <p>Nocturnal? Yes</p>
-                    <% } else { %>
-                        <p>Nocturnal? No</p>
-                    <% } %>
-                    <form action="/admin/<%=bird._id%>?_method=PUT" method="POST">
-                    <label for="isApproved">Check for Approval:</label>
-                    <input type="checkbox" name="isApproved" id="isApproved"/>
-                        <button type="submit">Approve or deny <%=bird.name%> request</button>
+        <div class="adminBox">
+            <div class="adminCards">
+                <h2>Users</h2>
+                <% for (let user of users) { %>
+                    <h3><%=user.username%></h3>
+                    <p class="text">Current Bird Collection: <%=user.birdCollection.length%></p>
+                    <p class="text">Admin? <%=user.isAdmin%></p>
+                    <form action="/admin/<%=user.id%>?_method=DELETE" method="POST">
+                        <button class="delete" type="submit">Delete <%=user.username%> from index</button>
                     </form>
-                </div>
-            <% } %>
-        <% }) %>
+                <% } %>
+            </div>
+            <div class="adminCards">
+            <h2>Bird Requests</h2>
+                <% birdReq.forEach((bird) => { %>
+                    <% if (bird.isApproved === false) { %>
+                        <div class="birdCard">
+                            <h3><%= bird.name %></h3>
+                            <p class="text">Requester: <%= bird.requester.username %></p>
+                            <p class="text">Continent(s): <%= bird.continent.join(", ") %></p>
+                            <p class="text">Habitat(s): <%= bird.habitat.join(", ") %></p>
+                            <p class="text">Diet: <%= bird.diet.join(", ") %></p>
+                            <p class="text">Color: <%= bird.color%></p> <!--FUNCTION MAKE A BOX THAT DISPLAYS THE HEXADECIMAL COLOR, NOT THE STRING-->
+                            <p class="text">Wingspan: <%= bird.wingspan %>cm</p>
+                            <% if (bird.isNocturnal === true) { %>
+                                <p class="text">Nocturnal? Yes</p>
+                            <% } else { %>
+                                <p class="text">Nocturnal? No</p>
+                            <% } %>
+                            <form action="/admin/<%=bird._id%>?_method=PUT" method="POST">
+                            <label for="isApproved" class="text">Check for Approval:</label>
+                            <input type="checkbox" name="isApproved" id="isApproved"/>
+                                <button class="delete" type="submit">Approve or deny <%=bird.name%> request</button>
+                            </form>
+                        </div>
+                    <% } %>
+                <% }) %>
+        </div>
     </div>
 </body>
 </html>
