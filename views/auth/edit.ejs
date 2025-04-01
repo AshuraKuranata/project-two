@@ -6,13 +6,13 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <h1>Sign up for a free bird-watching profile!</h1>
-    <form action="/auth/sign-up" method="POST">
+    <h1>Edit Your Profile</h1>
+    <form action="/auth/edit/<%=user._id%>/?_method=PUT" method="POST">
         <div class="authBox">
             <div class="userCred">
                 <label for="username">Username:</label>
                 <p>Must be at least 3 alphanumeric characters</p>
-                <input autocomplete="off" type="text" name="username" maxlength="25" id="username" required pattern="\w{3,}" />
+                <input autocomplete="off" type="text" name="username" value="<%=user.username%>" maxlength="25" id="username" required pattern="\w{3,}" />
             </div>
             <div class="userCred">
                 <label for="password">Password:</label>
@@ -22,11 +22,7 @@
                 <input autocomplete="off" type="password" name="confirmPassword" id="confirmPassword" required pattern="\S{4,}" />
             </div>
             <div class="userCred">
-                <label for="admin">Administrator Credentials:</label>
-                <input autocomplete="off" type="password" name="admin" id="admin"/>
-            </div>
-            <div class="userCred">
-                <button type="submit">Create Profile</button>
+                <button type="submit">Update Profile</button>
             </div>
         </div>
     </form>

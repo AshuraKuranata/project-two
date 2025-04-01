@@ -49,10 +49,11 @@ app.use(express.static(path.join(__dirname, 'public'))); // Call for static file
 app.get('/', birdCtrl.home); // View of Bird App home page 
 app.get('/birdapp/birds', isSignedIn, birdCtrl.birdIndex) // View full index of birds in model
 app.get('/birdapp/newbird', isSignedIn, birdCtrl.addBirdForm) // Form to create new bird for model
-app.post('/birdapp/birds', isSignedIn, birdCtrl.createBird) // Creates bird in model
+app.post('/birdapp/birds', isSignedIn, birdCtrl.requestBird) // Creates bird in model
 app.get('/birdapp/birds/:birdId/edit', isSignedIn, birdCtrl.editBird) // Form to update bird in model
 app.put('/birdapp/birds/:birdId', isSignedIn, birdCtrl.updateBird) // Update to specific bird
 app.delete('/birdapp/birds/:birdId', isSignedIn, birdCtrl.deleteBird) // Deletes bird from model
+app.get('/birdapp/birddetails/:birdId', isSignedIn, birdCtrl.birdDetail)
 
 // User Collection operations
 app.get('/birdapp/collection', isSignedIn, birdCtrl.userCollection) // Views user's collection
@@ -60,8 +61,13 @@ app.get('/birdapp/collection/editcollection', isSignedIn, birdCtrl.selectBirdCol
 app.post('/birdapp/collection/addbird', isSignedIn, birdCtrl.addCollection) // Add Bird to User's collection
 app.post('/birdapp/collection/removebird', isSignedIn, birdCtrl.deleteCollectionBird) // Remove Bird from User's Collection
 
+// Administrator operations
+app.get('/admin', isSignedIn, birdCtrl.adminPage)
+app.put('/admin/:birdId', isSignedIn, birdCtrl.createBird)
+app.delete('/admin/:userId', isSignedIn, birdCtrl.deleteUser)
+
 // Operation for all authentication programming stored in /controllers/auth.js
-app.use('/auth', userCtrl)   
+app.use('/auth', userCtrl)
 
 app.listen(port, () => {
     console.log(`The app is ready on port ${port}`)

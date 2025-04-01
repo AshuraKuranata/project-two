@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+    },
     birdCollection: [
         {
             type: mongoose.Schema.Types.ObjectId,

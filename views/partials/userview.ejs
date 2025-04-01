@@ -1,5 +1,8 @@
 <a href="/">Home</a>
 <a href="/birdapp/birds">All Birds</a>
 <a href="/birdapp/collection"><%= user.username%>'s Collection</a>
+<% if (user.isAdmin === true) {%>
+    <a href="/admin">Administrator Page</a>
+<% } %>
 
 <a href="/auth/sign-out">Sign Out</a>

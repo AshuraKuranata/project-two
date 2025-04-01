@@ -7,7 +7,7 @@
 </head>
 <body>
     <%- include('../partials/userview.ejs') %>
-    <h1>Form to add bird to model</h1>
+    <h1>Request to add a New Bird</h1>
     <p>Hold 'control' or 'shift' on keyboard to select multiple options for dropdown.</p>
     <form action="/birdapp/birds" method="POST">
         <label for="name">Bird Name:</label>
@@ -56,7 +56,7 @@
         <label for="isNocturnal">Nocturnal?</label>
         <input type="checkbox" name="isNocturnal" id="isNocturnal" />
 
-        <button type="submit">Add Bird to Index</button>
+        <button type="submit">Request Bird for Index</button>
 
     </form>
 </body>

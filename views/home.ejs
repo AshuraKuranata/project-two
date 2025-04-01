@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+    <link ref="stylesheet" 
 </head>
 <body>
     <% if (user) {%>
         <%- include('./partials/userview.ejs') %>
         <h1>Welcome to the Bird Watching App, <%= user.username %>!</h1>
+        <a href="/auth/edit/<%=user._id%>">Edit <%=user.username%>'s profile</a>
     <% } else { %>
         <h1>Welcome to the Bird Watching App!</h1>
-        <a href="/auth/sign-up">Sign up to the Bird Watching app</a>
+        <a href="/auth/sign-up">Sign up to the Bird Watching app</a><br>
         <a href="/auth/sign-in">Sign in to the Bird Watching app</a>
     <% } %>
 </body>

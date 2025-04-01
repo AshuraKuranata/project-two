@@ -13,7 +13,12 @@
             <div class="birdCard">
                 <select name="birdCollection" id="birdSelect">
                     <% for (let bird of birds) { %>
-                        <option value="<%=bird._id%>"><%=bird.name%></option>
+                        <!--troubles iterating through the loop to fix-->
+                        <!-- <% if (bird._id === collection._id) { %>
+                            <option value="<%=bird._id%>"><%=bird.name%></option>
+                        <% } else { %>
+                        <% } %> -->
+                        <option value="<%=bird._id%>"><%=bird.name%></option> 
                         <% } %>
                 </select>
             </div>

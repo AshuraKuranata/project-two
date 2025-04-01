@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=bird.name%></title>
+</head>
+<body>
+    <%- include('../partials/userview.ejs') %>
+    <h1><%=bird.name%></h1>
+        <div class="birdCard">
+            <h2><%= bird.name %></h2>
+            <p>Continent(s): <%= bird.continent.join(", ") %></p>
+            <p>Habitat(s): <%= bird.habitat.join(", ") %></p>
+            <p>Diet: <%= bird.diet.join(", ") %></p>
+            <p>Color: <%= bird.color%></p> <!--FUNCTION MAKE A BOX THAT DISPLAYS THE HEXADECIMAL COLOR, NOT THE STRING-->
+            <p>Wingspan: <%= bird.wingspan %>cm</p>
+            <% if (bird.isNocturnal === true) { %>
+                <p>Nocturnal? Yes</p>
+            <% } else { %>
+                <p>Nocturnal? No</p>
+            <% } %>
+            <% if (user.isAdmin === true) {%>
+            <a href="/birdapp/birds/<%= bird._id%>/edit">Edit <%= bird.name%></a>
+            <form action="/birdapp/birds/<%=bird._id%>?_method=DELETE" method="POST">
+                <button type="submit">Delete <%=bird.name%> from index</button>
+            </form>
+            <% } %>
+        </div>
+</body>
+</html>

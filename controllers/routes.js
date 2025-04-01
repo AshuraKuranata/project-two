@@ -13,16 +13,28 @@ const birdIndex = async (req, res) => {
     res.render('birdapp/birdindex.ejs', { birds: allBirds });
 }
 
+const birdDetail = async (req, res) => {
+    const birdDetail = await Bird.findById(req.params.birdId);
+    res.render('birdapp/birddetails.ejs', {bird: birdDetail})
+}
+
 const addBirdForm = async (req, res) => {
     res.render('birdapp/newbird.ejs');
 }
 
-const createBird = async (req, res) => {
+const requestBird = async (req, res) => {
+    const user = await User.findById( req.session.user._id )
     if (req.body.isNocturnal === "on") {
         req.body.isNocturnal = true;
     } else {
         req.body.isNocturnal = false;
     }
+    if (user.isAdmin === true) {
+        req.body.isApproved = true
+    } else {
+        req.body.isApproved = false;
+    }
+    req.body.requester = user,
     await Bird.create(req.body);
     res.redirect('birds')
 }
@@ -49,17 +61,17 @@ const deleteBird = async (req, res) => {
 
 // CRUD Operation to relate Bird and User models 
 const userCollection = async (req, res) => {
-    const user = await User.find({ username: req.session.user.username }).populate('birdCollection').exec()
-    const userCollection = user[0].birdCollection
+    const userId = await User.findById( req.session.user._id ).populate('birdCollection').exec()
+    const userCollection = userId.birdCollection
     // console.log(user[0].birdCollection) // NEED TO CHANGE LOGGED DATA FROM AN ARRAY INTO SINGLE OBJECT
     res.render(`birdapp/usercollection.ejs`, { birds: userCollection })
 }
 
 const selectBirdCollection = async (req, res) => {
     const allBirds = await Bird.find();
-    const user = await User.find({ username: req.session.user.username }).populate('birdCollection').exec()
-    const userCollection = user[0].birdCollection
-    // console.log(userCollection);
+    const userId = await User.findById( req.session.user._id ).populate('birdCollection').exec()
+    const userCollection = userId.birdCollection
+    console.log(userCollection);
     res.render('birdapp/editcollection.ejs', { birds: allBirds, collection: userCollection })
 }
 
@@ -73,6 +85,17 @@ const addCollection = async (req, res) => {
     res.redirect('/birdapp/collection')    
 }
 
+// const editCollection = async (req, res) => {
+//     const birdId = await Bird.findById(req.body.birdCollection);
+//     const userId = await User.findOneAndUpdate(
+//         { username: req.session.user.username },
+//         { birdCollection: birdId },
+//         { new: true },
+//     );
+//     console.log('Updated Document:', addCollection);
+//     res.redirect(`/birdapp/collection`)
+// }
+
 const deleteCollectionBird = async (req, res) => {
     const birdId = req.body.birdCollectionRemove;
     console.log(birdId);
@@ -83,6 +106,29 @@ const deleteCollectionBird = async (req, res) => {
     );
     console.log("Updated User Collection:", userId.birdCollection);
     res.redirect('/birdapp/collection')
+}
+
+// Administrator Page
+
+const adminPage = async (req, res) => {
+    const allUsers = await User.find().populate('birdCollection').exec();
+    const birdRequests = await Bird.find().populate('requester').exec();
+    res.render('admin.ejs', { users: allUsers, birdReq: birdRequests })
+}
+
+const deleteUser = async (req, res) => {
+    const userId = await User.findByIdAndDelete(req.params.userId);
+    res.redirect('/admin')
+}
+
+const createBird = async (req, res) => {
+    if (req.body.isApproved === "on") {
+        req.body.isApproved = true;
+        await Bird.findByIdAndUpdate(req.params.birdId, req.body);
+    } else {
+        await Bird.findByIdAndDelete(req.params.birdId);
+    }
+    res.redirect('/admin')
 }
 
 /*  Bad Code - was trying to create a forEach to verify
@@ -108,26 +154,13 @@ const deleteCollectionBird = async (req, res) => {
 }
 */
 
-// const editCollection = async (req, res) => {
-//     const birdId = await Bird.findById(req.body.birdCollection);
-//     const userId = await User.findOneAndUpdate(
-//         { username: req.session.user.username },
-//         { birdCollection: birdId },
-//         { new: true },
-//     );
-//     console.log('Updated Document:', addCollection);
-//     res.redirect(`/birdapp/collection`)
-// }
-
-// if (req.body.deleteEntry === "on") {       
-// }
 
 module.exports = {
     home,
     birdIndex,
     userCollection,
     addBirdForm,
-    createBird,
+    requestBird,
     editBird,
     updateBird,
     deleteBird,
@@ -135,4 +168,8 @@ module.exports = {
     selectBirdCollection,
     // editCollection,
     deleteCollectionBird,
+    adminPage,
+    createBird,
+    deleteUser,
+    birdDetail,
 };

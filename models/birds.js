@@ -8,17 +8,9 @@ const birdSchema = new mongoose.Schema({
     color: String,
     wingspan: Number,
     isNocturnal: Boolean,
-    height: Number,
-    weight: Number,
-    locationSeen: String,
-    dateSeen: Date,
-    collections: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true,
-        }
-    ]
+    isApproved: Boolean,
+    requester: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    comments: [],
 })
 
 const Bird = mongoose.model('Bird', birdSchema);
