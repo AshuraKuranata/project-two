@@ -25,10 +25,11 @@ router.post('/sign-up', async (req, res) => {
     const user = await User.create(req.body);
     req.session.user = {
         username: user.username,
+        _id: user._id,
         birdCollection: user.birdCollection,
     };
-    req.session.save(() => {
-        res.redirect('/');
+    await req.session.save(() => { // Strange bug: when I try to directly go to anything user related after sign-up, it's not properly fixing
+        res.redirect('/');  // FIXED: added await to req.session.save so it wouldn't go faster than the req.session.user load
     })
 })
 

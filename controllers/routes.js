@@ -63,7 +63,7 @@ const deleteBird = async (req, res) => {
 const userCollection = async (req, res) => {
     const userId = await User.findById( req.session.user._id ).populate('birdCollection').exec()
     const userCollection = userId.birdCollection
-    // console.log(user[0].birdCollection) // NEED TO CHANGE LOGGED DATA FROM AN ARRAY INTO SINGLE OBJECT
+    // console.log(user[0].birdCollection) // NEED TO CHANGE LOGGED DATA FROM USER ARRAY TO FIND SINGLE OBJECT
     res.render(`birdapp/usercollection.ejs`, { birds: userCollection })
 }
 
@@ -85,6 +85,7 @@ const addCollection = async (req, res) => {
     res.redirect('/birdapp/collection')    
 }
 
+// Take out: Rather than adding new birds to collection, it was just editing the objectId instance
 // const editCollection = async (req, res) => {
 //     const birdId = await Bird.findById(req.body.birdCollection);
 //     const userId = await User.findOneAndUpdate(
@@ -131,7 +132,7 @@ const createBird = async (req, res) => {
     res.redirect('/admin')
 }
 
-/*  Bad Code - was trying to create a forEach to verify
+/*  Bad Code - was trying to create a forEach to verify users
 userCheck.birdCollection.forEach((birdCheck) => {
     if (birdCheck.id === birdId.id) {
         res.redirect('/birdapp/collection')
@@ -166,7 +167,7 @@ module.exports = {
     deleteBird,
     addCollection,
     selectBirdCollection,
-    // editCollection,
+    // editCollection, see editCollection function above for details
     deleteCollectionBird,
     adminPage,
     createBird,
